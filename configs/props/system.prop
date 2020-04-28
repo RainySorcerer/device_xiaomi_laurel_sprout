@@ -61,6 +61,9 @@ vendor.mm.enable.qcom_parser=16777215
 # Netflix
 ro.netflix.bsp_rev=Q6125-17995-1
 
+# Pre-Rendering
+ro.vendor.perf.scroll_opt=true
+
 # Radio
 persist.radio.NO_STAPA=1
 persist.rcs.supported = 1
