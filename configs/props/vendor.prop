@@ -169,6 +169,7 @@ ro.vendor.qti.va_aosp.support=1
 persist.backup.ntpServer=0.pool.ntp.org
 
 # Graphics
+debug.performance.tuning=1
 debug.egl.hw=0
 debug.force_no_blanking=true
 debug.mdpcomp.logs=0
