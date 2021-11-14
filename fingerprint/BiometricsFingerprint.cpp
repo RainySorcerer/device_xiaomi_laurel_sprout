@@ -121,7 +121,12 @@ BiometricsFingerprint::BiometricsFingerprint() : mClientCallback(nullptr), mDevi
                 continue;
             }
 
-            mDevice->extCmd(mDevice, COMMAND_NIT, readBool(fodUiFd) ? PARAM_NIT_FOD : PARAM_NIT_NONE);
+            bool fingerDown = readBool(fodUiFd);
+            ALOGI("fod_ui status: %d", fingerDown);
+            mDevice->extCmd(mDevice, COMMAND_NIT, fingerDown ? PARAM_NIT_FOD : PARAM_NIT_NONE);
+            if (!fingerDown) {
+                set(FOD_STATUS_PATH, FOD_STATUS_OFF);
+            }
         }
     }).detach();
 }
@@ -487,14 +492,11 @@ Return<bool> BiometricsFingerprint::isUdfps(uint32_t /* sensorId */) {
 
 Return<void> BiometricsFingerprint::onFingerDown(uint32_t /* x */, uint32_t /* y */,
                                                 float /* minor */, float /* major */) {
-    if (mHaveUdfps)
-        set(FOD_STATUS_PATH, FOD_STATUS_ON);
+    set(FOD_STATUS_PATH, FOD_STATUS_ON);
     return Void();
 }
 
 Return<void> BiometricsFingerprint::onFingerUp() {
-    if (mHaveUdfps)
-        set(FOD_STATUS_PATH, FOD_STATUS_OFF);
     return Void();
 }
 
