@@ -170,7 +170,7 @@ persist.backup.ntpServer=0.pool.ntp.org
 
 # Graphics
 debug.performance.tuning=1
-debug.egl.hw=0
+debug.egl.hw=1
 debug.force_no_blanking=true
 debug.mdpcomp.logs=0
 debug.sf.enable_transaction_tracing=false
