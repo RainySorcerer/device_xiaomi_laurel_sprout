@@ -211,15 +211,6 @@
       "ResetOnInit": true
     },
     {
-      "Name": "PMQoSCpuDmaLatency",
-      "Path": "/dev/cpu_dma_latency",
-      "Values": [
-        "2c",
-        "64"
-      ],
-      "HoldFd": true
-    },
-    {
       "Name": "SchedBoost",
       "Path": "/proc/sys/kernel/sched_boost",
       "Values": [
@@ -343,12 +334,6 @@
       "Node": "CPULittleClusterMinFreq",
       "Duration": 3000,
       "Value": "9999999"
-    },
-    {
-      "PowerHint": "LAUNCH",
-      "Node": "PMQoSCpuDmaLatency",
-      "Duration": 3000,
-      "Value": "2c"
     },
     {
       "PowerHint": "LAUNCH",
