@@ -176,7 +176,8 @@ PRODUCT_PACKAGES += \
     SettingsProviderLaurelSprout \
     SystemUILaurelSprout \
     TelephonyLaurelSprout \
-    WifiOverlayLaurelSprout
+    WifiOverlayLaurelSprout \
+    SimpleDeviceConfigOverlay
 
 # Perf
 PRODUCT_PACKAGES += \
