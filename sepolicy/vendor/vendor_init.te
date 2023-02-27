@@ -6,6 +6,7 @@ set_prop(vendor_init, vendor_video_prop)
 allow vendor_init {
   proc_dirty
   proc
+  vendor_proc_energy_aware
 }:file w_file_perms;
 
 allow vendor_init vendor_camera_prop:property_service set;
