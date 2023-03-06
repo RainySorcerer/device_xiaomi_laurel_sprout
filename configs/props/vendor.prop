@@ -173,6 +173,7 @@ debug.performance.tuning=1
 debug.sf.enable_transaction_tracing=false
 debug.egl.hw=1
 debug.sf.predict_hwc_composition_strategy=0
+debug.sf.treat_170m_as_sRGB=1
 debug.force_no_blanking=true
 debug.mdpcomp.logs=0
 debug.sf.enable_transaction_tracing=false
