@@ -42,3 +42,6 @@ allow hal_power_default system_server:process setsched;
 
 # To get/set powerhal state property
 set_prop(hal_power_default, vendor_power_prop)
+
+# setup premission for libperfmgr
+allow hal_power_default proc:file { open read write create };
