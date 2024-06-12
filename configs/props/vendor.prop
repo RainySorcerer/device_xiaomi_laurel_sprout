@@ -239,5 +239,8 @@ suspend.max_sleep_time_millis=40000
 vendor.usb.diag.func.name=diag
 vendor.usb.use_ffs_mtp=0
 
+# Watchdog
+ro.hw_timeout_multiplier=6
+
 # Zygote
 zygote.critical_window.minute=10
