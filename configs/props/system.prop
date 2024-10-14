@@ -15,7 +15,10 @@ persist.vendor.radio.ignore_dom_time=5
 ro.vendor.use_data_netmgrd=true
 
 # Dalvik
-dalvik.vm.dex2oat64.enabled=true
+dalvik.vm.dex2oat-cpu-set=4,5,6,7
+dalvik.vm.dex2oat-threads=4
+dalvik.vm.image-dex2oat-cpu-set=4,5,6,7
+dalvik.vm.image-dex2oat-threads=4
 
 # Disable vsync for cpu rendered apps
 debug.cpurend.vsync=false
