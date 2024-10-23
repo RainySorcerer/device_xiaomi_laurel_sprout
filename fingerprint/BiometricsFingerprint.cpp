@@ -34,13 +34,14 @@
 #define PARAM_NIT_FOD 1
 #define PARAM_NIT_NONE 0
 
-#define DISPPARAM_PATH "/sys/class/drm/card0-DSI-1/disp_param"
-#define DISPPARAM_HBM_FOD_ON "0x1d20FE0"
-#define DISPPARAM_HBM_FOD_OFF "0x20f0F20"
-
 #define FOD_STATUS_PATH "/sys/class/touch/tp_dev/fod_status"
 #define FOD_STATUS_ON 1
 #define FOD_STATUS_OFF 0
+
+static const char* kFodUiPaths[] = {
+        "/sys/devices/platform/soc/soc:qcom,dsi-display-primary/fod_ui",
+        "/sys/devices/platform/soc/soc:qcom,dsi-display/fod_ui",
+};
 
 namespace {
 
@@ -48,6 +49,25 @@ template <typename T>
 static void set(const std::string& path, const T& value) {
     std::ofstream file(path);
     file << value;
+}
+
+static bool readBool(int fd) {
+    char c;
+    int rc;
+
+    rc = lseek(fd, 0, SEEK_SET);
+    if (rc) {
+        ALOGE("failed to seek fd, err: %d", rc);
+        return false;
+    }
+
+    rc = read(fd, &c, sizeof(char));
+    if (rc != 1) {
+        ALOGE("failed to read bool from fd, err: %d", rc);
+        return false;
+    }
+
+    return c != '0';
 }
 
 } // anonymous namespace
@@ -73,6 +93,37 @@ BiometricsFingerprint::BiometricsFingerprint() : mClientCallback(nullptr), mDevi
     if (!mDevice) {
         ALOGE("Can't open HAL module");
     }
+
+    std::thread([this]() {
+            int fodUiFd;
+            for (auto& path : kFodUiPaths) {
+                fodUiFd = open(path, O_RDONLY);
+                if (fodUiFd >= 0) {
+                    break;
+                }
+            }
+
+            if (fodUiFd < 0) {
+                ALOGE("failed to open fd, err: %d", fodUiFd);
+                return;
+            }
+
+        struct pollfd fodUiPoll = {
+            .fd = fodUiFd,
+            .events = POLLERR | POLLPRI,
+            .revents = 0,
+        };
+
+        while (true) {
+            int rc = poll(&fodUiPoll, 1, -1);
+            if (rc < 0) {
+                ALOGE("failed to poll fd, err: %d", rc);
+                continue;
+            }
+
+            mDevice->extCmd(mDevice, COMMAND_NIT, readBool(fodUiFd) ? PARAM_NIT_FOD : PARAM_NIT_NONE);
+        }
+    }).detach();
 }
 
 BiometricsFingerprint::~BiometricsFingerprint() {
@@ -436,20 +487,14 @@ Return<bool> BiometricsFingerprint::isUdfps(uint32_t /* sensorId */) {
 
 Return<void> BiometricsFingerprint::onFingerDown(uint32_t /* x */, uint32_t /* y */,
                                                 float /* minor */, float /* major */) {
-    if (mHaveUdfps) {
+    if (mHaveUdfps)
         set(FOD_STATUS_PATH, FOD_STATUS_ON);
-        set(DISPPARAM_PATH, DISPPARAM_HBM_FOD_ON);
-        mDevice->extCmd(mDevice, COMMAND_NIT, PARAM_NIT_FOD);
-    }
     return Void();
 }
 
 Return<void> BiometricsFingerprint::onFingerUp() {
-    if (mHaveUdfps) {
-        set(DISPPARAM_PATH, DISPPARAM_HBM_FOD_OFF);
-        mDevice->extCmd(mDevice, COMMAND_NIT, PARAM_NIT_NONE);
+    if (mHaveUdfps)
         set(FOD_STATUS_PATH, FOD_STATUS_OFF);
-    }
     return Void();
 }
 
