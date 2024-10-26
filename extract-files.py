@@ -70,6 +70,17 @@ blob_fixups: blob_fixups_user_type = {
         .replace_needed('libhidltransport.so', 'libhidlbase-v32.so'),
     'vendor/etc/seccomp_policy/atfwd@2.0.policy': blob_fixup()
         .add_line_if_missing('gettid: 1'),
+    'vendor/lib/hw/audio.primary.laurel_sprout.so': blob_fixup()
+        .binary_regex_replace(b"vendor/lib/liba2dpoffload.so", b"liba2dpoffload_laurel_sprout.so")
+        .binary_regex_replace(b"vendor/lib/libbatterylistener.so", b"libbatterylistener_laurel_sprout.so")
+        .binary_regex_replace(b"vendor/lib/libcirrusspkrprot.so", b"libcirrusspkrprot_laurel_sprout.so")
+        .binary_regex_replace(b"vendor/lib/libcomprcapture.so", b"libcomprcapture_laurel_sprout.so")
+        .binary_regex_replace(b"vendor/lib/libexthwplugin.so", b"libexthwplugin_laurel_sprout.so")
+        .binary_regex_replace(b"vendor/lib/libhdmiedid.so", b"libhdmiedid_laurel_sprout.so")
+        .binary_regex_replace(b"vendor/lib/libhfp.so", b"libhfp_laurel_sprout.so")
+        .binary_regex_replace(b"vendor/lib/libsndmonitor.so", b"libsndmonitor_laurel_sprout.so")
+        .binary_regex_replace(b"vendor/lib/libspkrprot.so", b"libspkrprot_laurel_sprout.so")
+        .binary_regex_replace(b"vendor/lib/libssrec.so", b"libssrec_laurel_sprout.so")
 
 }  # fmt: skip
 

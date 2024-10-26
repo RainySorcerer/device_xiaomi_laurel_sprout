@@ -55,11 +55,11 @@ vendor/lib/soundfx/libqcvirt.so
 vendor/lib/soundfx/libshoebox.so
 
 # Audio HAL
-vendor/lib/hw/audio.primary.trinket.so
+vendor/lib/hw/audio.primary.trinket.so:vendor/lib/hw/audio.primary.laurel_sprout.so;FIX_SONAME;DISABLE_DEPS
 vendor/lib/libaudio_log_utils.so
 
 # Audio Libraries
-vendor/lib/liba2dpoffload.so
+vendor/lib/liba2dpoffload.so:vendor/lib/liba2dpoffload_laurel_sprout.so;FIX_SONAME
 vendor/lib/libacdb-fts.so
 vendor/lib/libacdbloader.so
 vendor/lib/libacdbrtac.so
@@ -69,18 +69,18 @@ vendor/lib/libaudcal.so
 vendor/lib/libaudioalsa.so
 vendor/lib/libaudioconfigstore.so
 vendor/lib/libaudioparsers.so
-vendor/lib/libbatterylistener.so
-vendor/lib/libcirrusspkrprot.so
-vendor/lib/libcomprcapture.so
+vendor/lib/libbatterylistener.so:vendor/lib/libbatterylistener_laurel_sprout.so;FIX_SONAME
+vendor/lib/libcirrusspkrprot.so:vendor/lib/libcirrusspkrprot_laurel_sprout.so;FIX_SONAME
+vendor/lib/libcomprcapture.so:vendor/lib/libcomprcapture_laurel_sprout.so;FIX_SONAME
 vendor/lib/libdrc.so
-vendor/lib/libexthwplugin.so
-vendor/lib/libhdmiedid.so
+vendor/lib/libexthwplugin.so:vendor/lib/libexthwplugin_laurel_sprout.so;FIX_SONAME
+vendor/lib/libhdmiedid.so:vendor/lib/libhdmiedid_laurel_sprout.so;FIX_SONAME
 vendor/lib/libhdmipassthru.so
-vendor/lib/libhfp.so
+vendor/lib/libhfp.so:vendor/lib/libhfp_laurel_sprout.so;FIX_SONAME
 vendor/lib/libqtigef.so
-vendor/lib/libsndmonitor.so
-vendor/lib/libspkrprot.so
-vendor/lib/libssrec.so
+vendor/lib/libsndmonitor.so:vendor/lib/libsndmonitor_laurel_sprout.so;FIX_SONAME
+vendor/lib/libspkrprot.so:vendor/lib/libspkrprot_laurel_sprout.so;FIX_SONAME
+vendor/lib/libssrec.so:vendor/lib/libssrec_laurel_sprout.so;FIX_SONAME
 vendor/lib/libsurround_3mic_proc.so
 
 # Bluetooth
