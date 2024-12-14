@@ -22,6 +22,7 @@ PRODUCT_MANUFACTURER := xiaomi
 
 # EVO-X Stuff
 TARGET_HAS_UDFPS := true
+TARGET_USES_PICO_GAPPS := true
 
 PRODUCT_GMS_CLIENTID_BASE := android-xiaomi
 
