@@ -65,7 +65,7 @@ void check_device()
         // from - phone-xxhdpi-4096-dalvik-heap.mk
         heapstartsize = "8m";
         heapsize = "512m";
-        heaptargetutilization = "0.75;
+        heaptargetutilization = "0.75";
         heapminfree = "4m";
         heapmaxfree = "8m";
     }
